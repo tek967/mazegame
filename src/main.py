@@ -1,10 +1,7 @@
 from game import Window
 
-window = Window(1152, 864)
-
-@window.draw
-def draw():
-    window.draw()
-@window.update
-def update(dt):
-    window.update(dt)
+if __name__ == "__main__":
+    try:
+        exit(Window(1152,864))
+    except KeyboardInterrupt:
+        exit()
