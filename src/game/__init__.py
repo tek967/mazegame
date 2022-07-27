@@ -1,51 +1,39 @@
 import pygame
-import json, os
+from .game_elements.player import Player
+from .utilclasses import *
 
-"UTILITY CLASSES"
-
-def relative_path(relpath: str) -> str:
-    return os.path.join(os.path.dirname(__file__), '../../', relpath)
-
-class Vector2Int():
-    def __init__(self, x: int, y: int):
-        self.x = x
-        self.y = y
-
-    def get_items(self) -> list[int]:
-        return [self.x, self.y]
-
-class Vector2():
-    def __init__(self, x: float, y: float):
-        self.x = x
-        self.y = y
-    
-    def get_items(self) -> list[float]:
-        return [self.x, self.y]
-
-def get_palette() -> dict:
-    with open(relative_path("resources/palette.json"), 'r') as palette: return json.loads(palette.read())
-
-"END UTILITY CLASSES"
 
 class Window():
     def __init__(self, width: int, height: int):
         pygame.init()
+        self.fps = 60
+        self.clock = pygame.time.Clock()
 
         self.window = pygame.display.set_mode([width, height])
         pygame.display.set_caption("The Maze Game")
 
-        self.palette = get_palette()
+        self.palette = get_palette() 
 
+        # class objects
+        self.player = Player(self.window, 30,30)
+        # --
         self.is_window_alive = True
-        while self.is_window_alive: self.update(); pygame.display.update()
+        while self.is_window_alive: 
+            self.update()
+            pygame.display.update()
 
     def draw(self):
         self.window.fill(self.palette["verylightgray"])
+        self.player.draw()
 
     def update(self):
+        self.clock.tick(self.fps) 
+        self.player.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.is_window_alive = False
                 break
+            if event.type == pygame.KEYDOWN:
+                self.player.controls(event)
         self.draw()
         
