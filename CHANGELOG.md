@@ -1,3 +1,6 @@
+## commit 4
+  * fix map loading
+
 ## commit 3
   * add map loading
   * add black patches

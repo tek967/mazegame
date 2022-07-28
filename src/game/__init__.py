@@ -1,4 +1,6 @@
 import pygame
+
+from game.mapio import Map
 from .game_elements.player import Player
 from .utilclasses import *
 
@@ -14,7 +16,8 @@ class Window():
         self.palette = get_palette() 
 
         # class objects
-        self.player = Player(self.window)
+        self.map = Map(self.window)
+        self.player = Player(self.map,self.window)
         # --
         self.is_window_alive = True
         while self.is_window_alive: 
