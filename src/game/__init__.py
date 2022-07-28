@@ -2,7 +2,6 @@ import pygame
 from .game_elements.player import Player
 from .utilclasses import *
 
-
 class Window():
     def __init__(self, width: int, height: int):
         pygame.init()
@@ -15,7 +14,7 @@ class Window():
         self.palette = get_palette() 
 
         # class objects
-        self.player = Player(self.window, 30,30)
+        self.player = Player(self.window)
         # --
         self.is_window_alive = True
         while self.is_window_alive: 
@@ -30,10 +29,12 @@ class Window():
         self.clock.tick(self.fps) 
         self.player.update()
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 self.is_window_alive = False
                 break
             if event.type == pygame.KEYDOWN:
                 self.player.controls(event)
+            if event.type == pygame.KEYUP:
+                self.player.controls_key_up(event)
         self.draw()
         
