@@ -20,4 +20,3 @@ def collision_rects(rect1: Rectangle, rect2: Rectangle):
         return True
     else:
         return False   
-

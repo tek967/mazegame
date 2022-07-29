@@ -2,13 +2,13 @@ import pygame
 from game.utilclasses import *
  
 class Player:
-    def __init__(self, mp: dict, window: pygame.Surface): #mp is map
+    def __init__(self, window: pygame.Surface): #mp is map
         self.palette = get_palette()        
         self.velocity = pygame.Vector2(0,0)
 
         self.current_level = 1
-        
-        self.deathPosition = pygame.Vector2(mp["spawn_location"]["x"],mp["spawn_location"]["y"])
+
+        self.death_position = pygame.Vector2(20,20)        
         self.position = pygame.Vector2(20,20)
 
         self.colors = (self.palette["lightblue"], self.palette["blue"]) 
