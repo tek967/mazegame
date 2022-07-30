@@ -1,3 +1,7 @@
 #!/bin/sh
 
-python3 src/main.py
+if [ $1 == "--interpreter" ]; then
+    $2 src/main.py
+else
+    python3 src/main.py
+fi
